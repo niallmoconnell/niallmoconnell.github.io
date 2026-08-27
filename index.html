@@ -137,6 +137,7 @@
       box-shadow: 2px 2px 0 var(--pop); transition: transform 0.1s ease, box-shadow 0.1s ease;
     }
     .mini svg { width: 0.95rem; height: 0.95rem; }
+    .mini .txt { position: relative; top: 1.5px; }
     .mini:hover { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--pop); }
     .mini:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--pop); }
 
@@ -246,11 +247,11 @@
         <span class="emailactions">
           <button class="mini" id="copyEmail" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-            <span id="copyLabel">Copy</span>
+            <span id="copyLabel" class="txt">Copy</span>
           </button>
           <a class="mini" href="mailto:niallmjoconnell@gmail.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-            Email
+            <span class="txt">Email</span>
           </a>
         </span>
       </div>
