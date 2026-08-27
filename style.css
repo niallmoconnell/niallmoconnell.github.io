@@ -135,9 +135,14 @@ p { margin: 0 0 0.8rem; }
   display: inline-flex; align-items: center; justify-content: center;
 }
 .brand svg { width: 100%; height: 100%; display: block; transform-origin: center; }
-.brand.li svg { transform: scale(0.98); }
-.brand.gm svg { transform: scale(0.80); }
-.brand.yt svg { transform: scale(1.02); }
+/* Normalise the VISIBLE size of each brand mark (they fill their boxes by
+   different amounts) so they read the same size in the social row. */
+.brand.li svg { transform: scale(0.97); }  /* LinkedIn tile */
+.brand.st svg { transform: scale(1.03); }  /* Strava tile */
+.brand.ga svg { transform: scale(0.97); }  /* Garmin tile */
+.brand.ig svg { transform: scale(1.06); }  /* Instagram glyph */
+.brand.yt svg { transform: scale(1.0); }   /* YouTube wide shape */
+.brand.gm svg { transform: scale(0.80); }  /* Gmail M spans whole box */
 .linkrow .label { line-height: 1; position: relative; top: 2px; }
 .linkrow .arrow {
   margin-left: auto; width: 1.15rem; height: 1.15rem; flex: 0 0 auto; color: var(--muted);
@@ -145,6 +150,22 @@ p { margin: 0 0 0.8rem; }
 }
 .linkrow .arrow svg { width: 100%; height: 100%; display: block; }
 .linkrow:hover .arrow { transform: translateX(3px); color: var(--fg); }
+
+/* ---- Get in touch (email row: Copy + Email buttons) ---- */
+.emailrow, .emailrow:hover { transform: none; box-shadow: 4px 4px 0 var(--pop); cursor: default; }
+.emailrow .label { line-height: 1; position: relative; top: 2px; }
+.emailactions { margin-left: auto; display: inline-flex; gap: 0.5rem; }
+.mini {
+  font-family: inherit; font-size: 0.82rem; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 0.35rem; line-height: 1;
+  padding: 0.4rem 0.7rem; border: 1.5px solid var(--pop); border-radius: 9px;
+  background: var(--bg); color: var(--fg); text-decoration: none; cursor: pointer;
+  box-shadow: 2px 2px 0 var(--pop); transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.mini svg { width: 0.95rem; height: 0.95rem; }
+.mini .txt { position: relative; top: 1.5px; }
+.mini:hover { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--pop); }
+.mini:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--pop); }
 
 /* ---- Featured product (Bua PT) ---- */
 .feature {

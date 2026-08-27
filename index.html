@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=2" />
+  <link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
   <main class="wrap">
@@ -32,8 +32,8 @@
         <a class="brand st" href="https://www.strava.com/athletes/71093566" target="_blank" rel="noopener" aria-label="Strava">
           <svg viewBox="-2 -2 28 28" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#FC4C02"/><g transform="translate(4.8 4.8) scale(0.6)"><path fill="#ffffff" d="M10.463 8.229l2.836 5.598h4.172L10.463 0l-7 13.828h4.169Z"/><path fill="#FC8A5E" d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066Z"/></g></svg>
         </a>
-        <a class="brand gm" href="mailto:niallmjoconnell@gmail.com" aria-label="Email">
-          <svg viewBox="0 0 52 42" aria-hidden="true"><path fill="#4285f4" d="M3.5 42h9V20L0 10v28.5C0 40.4 1.6 42 3.5 42z"/><path fill="#34a853" d="M39.5 42h9c1.9 0 3.5-1.6 3.5-3.5V10L39.5 20z"/><path fill="#fbbc04" d="M39.5 3.5V20L52 10V5.3c0-4.3-4.9-6.7-8.3-4.1L39.5 3.5z"/><path fill="#ea4335" d="M12.5 20V3.5L26 13.6 39.5 3.5V20L26 30.1z"/><path fill="#c5221f" d="M0 5.3V10l12.5 10V3.5L8.3 1.2C4.9-1.4 0 1 0 5.3z"/></svg>
+        <a class="brand ga" href="https://connect.garmin.com/modern/profile/8d5d4efe-ddd7-4b27-ba66-f79a54d5ccfc" target="_blank" rel="noopener" aria-label="Garmin Connect">
+          <svg viewBox="-24 -24 560 560" aria-hidden="true"><defs><clipPath id="gc"><rect width="512" height="512" rx="115"/></clipPath></defs><g clip-path="url(#gc)"><rect width="512" height="512" fill="#3b3b3b"/><path d="M0 0H512V135L0 250Z" fill="#54a8dd"/><text x="256" y="120" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="82" letter-spacing="1" fill="#3b3b3b" transform="rotate(-9 256 118)">GARMIN</text><path d="M336 262 A105 105 0 1 0 336 398" fill="none" stroke="#54a8dd" stroke-width="50"/></g></svg>
         </a>
       </nav>
     </header>
@@ -63,7 +63,50 @@
         <span class="label">About</span>
         <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
       </a>
+
+      <h2>Get in touch</h2>
+      <div class="linkrow emailrow">
+        <span class="brand gm"><svg viewBox="0 0 52 42" aria-hidden="true"><path fill="#4285f4" d="M3.5 42h9V20L0 10v28.5C0 40.4 1.6 42 3.5 42z"/><path fill="#34a853" d="M39.5 42h9c1.9 0 3.5-1.6 3.5-3.5V10L39.5 20z"/><path fill="#fbbc04" d="M39.5 3.5V20L52 10V5.3c0-4.3-4.9-6.7-8.3-4.1L39.5 3.5z"/><path fill="#ea4335" d="M12.5 20V3.5L26 13.6 39.5 3.5V20L26 30.1z"/><path fill="#c5221f" d="M0 5.3V10l12.5 10V3.5L8.3 1.2C4.9-1.4 0 1 0 5.3z"/></svg></span>
+        <span class="label">Email</span>
+        <span class="emailactions">
+          <button class="mini" id="copyEmail" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span id="copyLabel" class="txt">Copy</span>
+          </button>
+          <a class="mini" href="mailto:niallmjoconnell@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <span class="txt">Email</span>
+          </a>
+        </span>
+      </div>
     </div>
   </main>
+  <script>
+    (function () {
+      var btn = document.getElementById('copyEmail');
+      var lbl = document.getElementById('copyLabel');
+      var email = 'niallmjoconnell@gmail.com';
+      function flash() {
+        lbl.textContent = 'Copied!';
+        setTimeout(function () { lbl.textContent = 'Copy'; }, 1500);
+      }
+      function fallbackCopy() {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = email; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.focus(); ta.select();
+          document.execCommand('copy'); document.body.removeChild(ta);
+        } catch (e) {}
+        flash();
+      }
+      btn.addEventListener('click', function () {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(flash).catch(fallbackCopy);
+        } else {
+          fallbackCopy();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
