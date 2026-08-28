@@ -96,12 +96,13 @@ p { margin: 0 0 0.8rem; }
 .soc:hover { transform: translate(1.5px, 1.5px); box-shadow: 1px 1px 0 var(--shadow); }
 .soc:active { transform: translate(2.5px, 2.5px); box-shadow: 0 0 0 var(--shadow); }
 .soc svg { width: 1.4rem; height: 1.4rem; display: block; overflow: visible; }
-/* muted brand colours */
-.soc.ig { color: #b0568c; }  /* Instagram magenta */
-.soc.li { color: #3f79aa; }  /* LinkedIn blue */
-.soc.yt { color: #c1554c; }  /* YouTube red */
-.soc.st { color: #cc6b3a; }  /* Strava orange */
-.soc.ga { color: #5a8aab; }  /* Garmin blue */
+/* official brand colours */
+.soc.ig { color: #E4405F; }  /* Instagram */
+.soc.li { color: #0A66C2; }  /* LinkedIn */
+.soc.li svg { transform: scale(0.9); transform-origin: center; }  /* reads a touch big */
+.soc.yt { color: #FF0000; }  /* YouTube */
+.soc.st { color: #FC4C02; }  /* Strava */
+.soc.ga { color: #007CC3; }  /* Garmin */
 
 /* ---- Back button (about page) ---- */
 .back {
