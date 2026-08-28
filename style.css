@@ -344,6 +344,10 @@ body.sheet-open { overflow: hidden; }
   will-change: transform;
 }
 .sheet.show { transform: translateY(0); }
+/* `.sheet { display:flex }` otherwise defeats the [hidden] attribute, leaving a
+   not-shown sheet in the layout — harmless off-screen on mobile, but as a
+   centered opacity:0 modal on desktop it swallowed clicks (e.g. Close). */
+.sheet[hidden], .sheet-backdrop[hidden] { display: none; }
 .sheet-grip { padding: 0.55rem 0 0.2rem; cursor: grab; touch-action: none; flex: 0 0 auto; }
 .sheet-handle { width: 42px; height: 5px; border-radius: 3px; background: var(--sheet-muted); opacity: 0.55; margin: 0 auto; }
 .sheet-close {
