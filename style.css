@@ -83,7 +83,7 @@ p { margin: 0 0 0.8rem; }
   width: 2.55rem; height: 2.55rem; flex: 0 0 auto;
   display: inline-flex; align-items: center; justify-content: center;
   border: 1.5px solid var(--pop); border-radius: 12px;
-  background: var(--card); color: var(--link);
+  background: var(--card); color: var(--fg);
   box-shadow: 2.5px 2.5px 0 var(--shadow);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
