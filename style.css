@@ -6,11 +6,11 @@
   --link-hover: #23543d;
   --rule: #e7e3da;
   --card: #ffffff;
-  --pop: #211f1c;          /* border color */
-  --shadow: #7cc242;       /* hard-shadow color (green pop) */
+  --pop: #211f1c;          /* border + hard-shadow color */
+  --shadow: #211f1c;       /* hard-shadow color (dark) */
   --ink2: #4a443b;         /* readable secondary text */
   --tint: rgba(143, 216, 54, 0.12); /* soft ambient glow */
-  --wash: rgba(150, 214, 80, 0.32); /* background colour wash */
+  --wash: rgba(191, 179, 156, 0.42); /* calm warm background wash */
   --maxw: 600px;
 }
 @media (prefers-color-scheme: dark) {
@@ -23,10 +23,10 @@
     --rule: #2b2924;
     --card: #1f1e18;
     --pop: #6fb894;
-    --shadow: #4f9e6f;
+    --shadow: #6fb894;
     --ink2: #c9c3b7;
     --tint: rgba(143, 216, 54, 0.10);
-    --wash: rgba(143, 216, 54, 0.13);
+    --wash: rgba(150, 140, 120, 0.14);
   }
 }
 * { box-sizing: border-box; }
@@ -34,7 +34,7 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   background-color: var(--bg);
-  background-image: linear-gradient(172deg, var(--wash) 0%, transparent 46%);
+  background-image: linear-gradient(172deg, var(--wash) 0%, transparent 55%);
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: var(--fg);
@@ -83,7 +83,7 @@ p { margin: 0 0 0.8rem; }
   width: 2.55rem; height: 2.55rem; flex: 0 0 auto;
   display: inline-flex; align-items: center; justify-content: center;
   border: 1.5px solid var(--pop); border-radius: 12px;
-  background: var(--card); color: var(--fg);
+  background: var(--card); color: var(--link);
   box-shadow: 2.5px 2.5px 0 var(--shadow);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
@@ -216,6 +216,7 @@ p { margin: 0 0 0.8rem; }
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 .storebtn svg { width: 1.1rem; height: 1.1rem; overflow: visible; }
+.storebtn.gplay svg { transform: translateX(1.5px); }  /* Play triangle reads left of centre */
 .storebtn:hover { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--shadow); }
 .storebtn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--shadow); }
 .mini {
