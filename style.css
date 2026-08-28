@@ -1,5 +1,5 @@
 :root {
-  --bg: #fbfaf7;
+  --bg: #8c8273;           /* Audrey's warm taupe */
   --fg: #211f1c;
   --muted: #726c63;
   --link: #2f6b4f;
@@ -8,9 +8,12 @@
   --card: #ffffff;
   --pop: #211f1c;          /* border + hard-shadow color */
   --shadow: #211f1c;       /* hard-shadow color (dark) */
-  --ink2: #4a443b;         /* readable secondary text */
-  --tint: rgba(143, 216, 54, 0.12); /* soft ambient glow */
-  --wash: rgba(191, 179, 156, 0.42); /* calm warm background wash */
+  --ink2: #4a443b;         /* readable secondary text (in-card) */
+  --onbg: #ffffff;              /* text on the taupe background */
+  --onbg-2: rgba(255,255,255,0.82); /* secondary text on background */
+  --onbg-3: rgba(255,255,255,0.62); /* muted text on background */
+  --chip: #f3f0ea;             /* small button fill (in-card) */
+  --wash: rgba(255,255,255,0.05); /* faint top-of-page lift */
   --maxw: 600px;
 }
 @media (prefers-color-scheme: dark) {
@@ -25,8 +28,11 @@
     --pop: #6fb894;
     --shadow: #6fb894;
     --ink2: #c9c3b7;
-    --tint: rgba(143, 216, 54, 0.10);
-    --wash: rgba(150, 140, 120, 0.14);
+    --onbg: #ece9e2;
+    --onbg-2: rgba(236,233,226,0.82);
+    --onbg-3: rgba(236,233,226,0.6);
+    --chip: #2a2822;
+    --wash: rgba(150, 140, 120, 0.10);
   }
 }
 * { box-sizing: border-box; }
@@ -49,15 +55,15 @@ body {
 h1 {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(1.9rem, 6.5vw, 2.5rem);
-  font-weight: 700; margin: 0 0 0.25rem;
+  font-weight: 700; margin: 0 0 0.25rem; color: var(--onbg);
   letter-spacing: -0.03em; line-height: 1.1;
 }
-.tagline { color: var(--muted); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.01em; margin: 0 0 0.9rem; }
+.tagline { color: var(--onbg-2); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.01em; margin: 0 0 0.9rem; }
 
 h2 {
   font-family: 'Poppins', sans-serif;
   font-size: 1.1rem; letter-spacing: -0.02em;
-  font-weight: 700; color: var(--fg);
+  font-weight: 700; color: var(--onbg);
   margin: 1.9rem 0 0.85rem;
 }
 
@@ -90,6 +96,12 @@ p { margin: 0 0 0.8rem; }
 .soc:hover { transform: translate(1.5px, 1.5px); box-shadow: 1px 1px 0 var(--shadow); }
 .soc:active { transform: translate(2.5px, 2.5px); box-shadow: 0 0 0 var(--shadow); }
 .soc svg { width: 1.4rem; height: 1.4rem; display: block; overflow: visible; }
+/* muted brand colours */
+.soc.ig { color: #b0568c; }  /* Instagram magenta */
+.soc.li { color: #3f79aa; }  /* LinkedIn blue */
+.soc.yt { color: #c1554c; }  /* YouTube red */
+.soc.st { color: #cc6b3a; }  /* Strava orange */
+.soc.ga { color: #5a8aab; }  /* Garmin blue */
 
 /* ---- Back button (about page) ---- */
 .back {
@@ -112,7 +124,7 @@ p { margin: 0 0 0.8rem; }
 }
 .topbar .back { margin-bottom: 0; justify-self: start; }
 .topbar-title {
-  grid-column: 2; justify-self: center;
+  grid-column: 2; justify-self: center; color: var(--onbg);
   font-family: 'Poppins', sans-serif; font-weight: 700;
   font-size: 1.3rem; letter-spacing: -0.02em;
 }
@@ -140,12 +152,12 @@ p { margin: 0 0 0.8rem; }
 .entry:last-child { margin-bottom: 0; }
 .entry::before {
   content: ""; position: absolute; left: 2px; top: 0.52rem;
-  width: 5px; height: 5px; border-radius: 50%; background: var(--link); opacity: 0.6;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--onbg); opacity: 0.55;
 }
-.entry .t { font-size: 1.02rem; line-height: 1.45; }
+.entry .t { font-size: 1.02rem; line-height: 1.45; color: var(--onbg); }
 .entry .t strong { font-weight: 600; }
-.entry .meta { color: var(--muted); }
-.entry .d { color: var(--ink2); font-size: 0.95rem; line-height: 1.45; margin-top: 0.1rem; }
+.entry .meta { color: var(--onbg-3); font-weight: 400; }
+.entry .d { color: var(--onbg-2); font-size: 0.95rem; line-height: 1.45; margin-top: 0.1rem; }
 
 /* ---- Poppy link buttons (linktree style) ---- */
 .links { margin: 0.2rem 0 0.5rem; }
@@ -212,7 +224,7 @@ p { margin: 0 0 0.8rem; }
 .storebtn {
   display: inline-flex; align-items: center; justify-content: center;
   width: 2.5rem; height: 2rem; border: 1.5px solid var(--pop); border-radius: 10px;
-  background: var(--bg); color: var(--fg); box-shadow: 2px 2px 0 var(--shadow);
+  background: var(--chip); color: var(--fg); box-shadow: 2px 2px 0 var(--shadow);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 .storebtn svg { width: 1.1rem; height: 1.1rem; overflow: visible; }
@@ -223,7 +235,7 @@ p { margin: 0 0 0.8rem; }
   font-family: inherit; font-size: 0.82rem; font-weight: 500;
   display: inline-flex; align-items: center; gap: 0.35rem; line-height: 1;
   padding: 0.4rem 0.7rem; border: 1.5px solid var(--pop); border-radius: 9px;
-  background: var(--bg); color: var(--fg); text-decoration: none; cursor: pointer;
+  background: var(--chip); color: var(--fg); text-decoration: none; cursor: pointer;
   box-shadow: 2px 2px 0 var(--shadow); transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 .mini svg { width: 0.95rem; height: 0.95rem; }
