@@ -183,35 +183,37 @@
         var lastFocus = null;
         var grip = sheet.querySelector('.sheet-grip');
         var closeBtn = sheet.querySelector('.sheet-back, .sheet-close');
+        var vp = window.visualViewport;
+        /* Pin the sheet's resting geometry on mobile so an in-app browser
+           (Instagram's) resizing its viewport AFTER the sheet opens can't move it.
+           The recordings showed two separate problems: (1) tall content overflowing
+           below the toolbar — a clip — fixed by capping to the *visible* viewport
+           (visualViewport.height excludes the chrome); and (2) the whole sheet
+           sliding DOWN when the bottom toolbar auto-hid and the viewport grew,
+           because it was anchored to bottom:0. Capping to the visible height and
+           then freezing top+height in pixels stops both. offsetTop/offsetHeight
+           ignore the slide transform, so they give the true resting geometry.
+           Desktop (centered modal) is left to its own CSS sizing. */
+        function pinSheet() {
+          if (window.innerWidth >= 768 || !vp) return;
+          sheet.style.maxHeight = Math.round(vp.height * 0.92) + 'px';
+          var h = sheet.offsetHeight;
+          var top = sheet.offsetTop;
+          sheet.style.top = top + 'px';
+          sheet.style.bottom = 'auto';
+          sheet.style.height = h + 'px';
+          sheet.style.maxHeight = h + 'px';
+        }
         function onKey(e) { if (e.key === 'Escape') close(); }
         function doOpen() {
           lastFocus = document.activeElement;
           backdrop.hidden = false; sheet.hidden = false;
           void sheet.offsetWidth;
+          pinSheet();                 /* cap to visible viewport, then freeze in px */
           backdrop.classList.add('show'); sheet.classList.add('show');
           document.body.classList.add('sheet-open');
           document.addEventListener('keydown', onKey);
           if (closeBtn) closeBtn.focus();
-          /* Freeze the frame height in pixels on mobile. The sheet is anchored to
-             the bottom with a content-driven height, so ANYTHING that changes the
-             content or the viewport after it opens — a late web-font reflow, or an
-             in-app browser (Instagram/Facebook) resizing its viewport as its chrome
-             settles — moves the top and makes it visibly jump. Once frozen, content
-             just scrolls inside a fixed frame instead. Desktop (centered modal) is
-             left to its own CSS sizing. */
-          if (window.innerWidth < 768) {
-            /* Cap the sheet to the *visible* viewport, then freeze it in pixels.
-               window.visualViewport.height excludes an in-app browser's chrome
-               (Instagram's toolbar), unlike vh/svh/getBoundingClientRect which
-               measure the layout viewport. Without this the tall About sheet
-               overflowed below Instagram's toolbar and then repositioned when
-               that toolbar auto-hid and the visible area grew — the jump. */
-            var vp = window.visualViewport;
-            var cap = Math.round((vp ? vp.height : window.innerHeight) * 0.88);
-            sheet.style.maxHeight = cap + 'px';
-            var h = Math.round(sheet.getBoundingClientRect().height);
-            if (h > 0) sheet.style.height = h + 'px';
-          }
         }
         function open(e) {
           if (e) e.preventDefault();
@@ -248,6 +250,7 @@
           var done = function () {
             sheet.hidden = true; backdrop.hidden = true;
             sheet.style.transform = ''; sheet.style.height = ''; sheet.style.maxHeight = '';
+            sheet.style.top = ''; sheet.style.bottom = '';
             sheet.removeEventListener('transitionend', done);
           };
           sheet.addEventListener('transitionend', done);
