@@ -200,8 +200,17 @@
              just scrolls inside a fixed frame instead. Desktop (centered modal) is
              left to its own CSS sizing. */
           if (window.innerWidth < 768) {
+            /* Cap the sheet to the *visible* viewport, then freeze it in pixels.
+               window.visualViewport.height excludes an in-app browser's chrome
+               (Instagram's toolbar), unlike vh/svh/getBoundingClientRect which
+               measure the layout viewport. Without this the tall About sheet
+               overflowed below Instagram's toolbar and then repositioned when
+               that toolbar auto-hid and the visible area grew — the jump. */
+            var vp = window.visualViewport;
+            var cap = Math.round((vp ? vp.height : window.innerHeight) * 0.88);
+            sheet.style.maxHeight = cap + 'px';
             var h = Math.round(sheet.getBoundingClientRect().height);
-            if (h > 0) { sheet.style.height = h + 'px'; sheet.style.maxHeight = h + 'px'; }
+            if (h > 0) sheet.style.height = h + 'px';
           }
         }
         function open(e) {
