@@ -195,20 +195,31 @@
         }
         function open(e) {
           if (e) e.preventDefault();
-          /* On a cold load the Poppins web font may not be cached yet. Opening
-             with the fallback font and then swapping to Poppins reflows the (long)
-             About content, and because the sheet is anchored to the bottom that
-             height change makes it visibly jump. Wait for the font first —
-             instant when it's already loaded, a brief beat on a cache-cleared
-             first open — with a safety cap so a slow/failed font never blocks. */
-          if (document.fonts && document.fonts.status !== 'loaded') {
-            var opened = false;
-            var go = function () { if (!opened) { opened = true; doOpen(); } };
-            document.fonts.ready.then(go);
-            setTimeout(go, 600);
-          } else {
-            doOpen();
+          /* On a cold first open (esp. in in-app browsers like Instagram's) the
+             Poppins web font may not be ready. Opening in the fallback font and
+             then swapping to Poppins reflows the long About content, and because
+             the sheet is anchored to the bottom that height change makes it jump.
+             `document.fonts.ready` isn't enough: if the Google Fonts stylesheet
+             itself hasn't loaded yet, Poppins isn't registered as pending so
+             `ready` resolves immediately. Instead poll `document.fonts.check`
+             (true only once the font is actually usable) until ready, with a
+             safety cap so a slow/failed font never blocks opening. */
+          var fonts = document.fonts;
+          var probe = "700 16px 'Poppins'";
+          var probe2 = "400 16px 'Poppins'";
+          function ready() {
+            return fonts.check(probe) && fonts.check(probe2);
           }
+          if (!fonts || !fonts.check) { doOpen(); return; }
+          try { fonts.load(probe); fonts.load(probe2); } catch (e2) {}
+          if (ready()) { doOpen(); return; }
+          var opened = false;
+          function go() { if (!opened) { opened = true; doOpen(); } }
+          var n = 0;
+          var iv = setInterval(function () {
+            n++;
+            if (ready() || n >= 12) { clearInterval(iv); go(); }
+          }, 80);
         }
         function close() {
           backdrop.classList.remove('show'); sheet.classList.remove('show');
