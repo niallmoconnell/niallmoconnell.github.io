@@ -19,13 +19,13 @@
   <meta name="twitter:title" content="Niall O'Connell" />
   <meta name="twitter:description" content="Product · Melbourne. Building Bua PT, an AI personal trainer app." />
   <meta name="twitter:image" content="https://niallmoconnell.github.io/og.png" />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml" />
   <meta name="theme-color" content="#7c7363" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#14130f" media="(prefers-color-scheme: dark)" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=24" />
+  <link rel="stylesheet" href="style.css?v=25" />
 </head>
 <body>
   <main class="wrap">
@@ -184,8 +184,7 @@
         var grip = sheet.querySelector('.sheet-grip');
         var closeBtn = sheet.querySelector('.sheet-back, .sheet-close');
         function onKey(e) { if (e.key === 'Escape') close(); }
-        function open(e) {
-          if (e) e.preventDefault();
+        function doOpen() {
           lastFocus = document.activeElement;
           backdrop.hidden = false; sheet.hidden = false;
           void sheet.offsetWidth;
@@ -193,6 +192,23 @@
           document.body.classList.add('sheet-open');
           document.addEventListener('keydown', onKey);
           if (closeBtn) closeBtn.focus();
+        }
+        function open(e) {
+          if (e) e.preventDefault();
+          /* On a cold load the Poppins web font may not be cached yet. Opening
+             with the fallback font and then swapping to Poppins reflows the (long)
+             About content, and because the sheet is anchored to the bottom that
+             height change makes it visibly jump. Wait for the font first —
+             instant when it's already loaded, a brief beat on a cache-cleared
+             first open — with a safety cap so a slow/failed font never blocks. */
+          if (document.fonts && document.fonts.status !== 'loaded') {
+            var opened = false;
+            var go = function () { if (!opened) { opened = true; doOpen(); } };
+            document.fonts.ready.then(go);
+            setTimeout(go, 600);
+          } else {
+            doOpen();
+          }
         }
         function close() {
           backdrop.classList.remove('show'); sheet.classList.remove('show');

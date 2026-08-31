@@ -108,7 +108,7 @@ p { margin: 0 0 0.8rem; }
 .soc:active { transform: translate(2.5px, 2.5px); box-shadow: 0 0 0 var(--shadow); }
 .soc svg { width: 1.4rem; height: 1.4rem; display: block; overflow: visible; }
 /* official brand colours */
-.soc.ig { color: #E4405F; }  /* Instagram */
+.soc.ig { color: #211f1c; }  /* Instagram (black to match the site ink) */
 .soc.li { color: #0A66C2; }  /* LinkedIn */
 .soc.li svg { transform: scale(0.9); transform-origin: center; }  /* reads a touch big */
 .soc.yt { color: #FF0000; }  /* YouTube */
