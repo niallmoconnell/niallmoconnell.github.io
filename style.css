@@ -340,7 +340,13 @@ body.sheet-open { overflow: hidden; }
   box-shadow: 0 -10px 44px rgba(0,0,0,0.38);
   transform: translateY(100%);
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-  max-height: 88vh; display: flex; flex-direction: column;
+  /* svh = small viewport height: stays fixed as an in-app browser's (e.g.
+     Instagram's) chrome settles after load. Plain vh changes during that
+     settle, which resized the sheet and made it visibly jump. vh is the
+     fallback for browsers without svh. */
+  max-height: 88vh;
+  max-height: 88svh;
+  display: flex; flex-direction: column;
   will-change: transform;
 }
 .sheet.show { transform: translateY(0); }
