@@ -192,6 +192,17 @@
           document.body.classList.add('sheet-open');
           document.addEventListener('keydown', onKey);
           if (closeBtn) closeBtn.focus();
+          /* Freeze the frame height in pixels on mobile. The sheet is anchored to
+             the bottom with a content-driven height, so ANYTHING that changes the
+             content or the viewport after it opens — a late web-font reflow, or an
+             in-app browser (Instagram/Facebook) resizing its viewport as its chrome
+             settles — moves the top and makes it visibly jump. Once frozen, content
+             just scrolls inside a fixed frame instead. Desktop (centered modal) is
+             left to its own CSS sizing. */
+          if (window.innerWidth < 768) {
+            var h = Math.round(sheet.getBoundingClientRect().height);
+            if (h > 0) { sheet.style.height = h + 'px'; sheet.style.maxHeight = h + 'px'; }
+          }
         }
         function open(e) {
           if (e) e.preventDefault();
@@ -226,7 +237,8 @@
           document.body.classList.remove('sheet-open');
           document.removeEventListener('keydown', onKey);
           var done = function () {
-            sheet.hidden = true; backdrop.hidden = true; sheet.style.transform = '';
+            sheet.hidden = true; backdrop.hidden = true;
+            sheet.style.transform = ''; sheet.style.height = ''; sheet.style.maxHeight = '';
             sheet.removeEventListener('transitionend', done);
           };
           sheet.addEventListener('transitionend', done);
