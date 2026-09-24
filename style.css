@@ -395,7 +395,7 @@ body.sheet-open { overflow: hidden; }
 
 /* Bua tile is now a button that opens its sheet */
 .buarow { cursor: pointer; }
-button.buarow { width: 100%; font-family: inherit; font-size: inherit; text-align: left; -webkit-appearance: none; appearance: none; }
+button.buarow { width: 100%; font-family: inherit; font-size: 1.02rem; text-align: left; -webkit-appearance: none; appearance: none; }
 
 /* Sheet header bar with Close pill (mirrors the About page nav) */
 .sheet-head-bar {
@@ -478,15 +478,12 @@ h1, .tagline, h2, .topbar-title,
   .links > *:nth-child(4) { animation-delay: 0.29s; }
 }
 
-/* Project summaries retain the existing warm palette and restrained shadows. */
-.project-card { margin: 0 0 1rem; padding: 1.2rem; border: 1.5px solid var(--box-border); border-radius: 14px; background: var(--box); color: var(--onbg); box-shadow: 4px 4px 0 var(--shadow); }
-.project-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: .3rem .8rem; margin-bottom: .7rem; }
-.project-heading h3 { margin: 0; font-size: 1.12rem; letter-spacing: -.02em; }
-.project-status { font-size: .72rem; color: var(--onbg-2); }
-.project-card p { font-size: .9rem; line-height: 1.6; }
-.project-card .contribution { color: var(--onbg-2); font-size: .84rem; }
-.project-link { display: inline-block; color: var(--onbg); font-size: .84rem; font-weight: 600; text-underline-offset: 4px; }
+/* Personal links */
 .personal-links { margin-top: 2.4rem; text-align: center; }
 .personal-links h2 { font-size: .85rem; font-weight: 500; color: var(--onbg-2); }
 .personal-links .socials { margin-top: .7rem; }
 @media (max-width: 380px) { .emailrow { flex-wrap: wrap; } .emailrow .label { white-space: normal; overflow-wrap: anywhere; line-height: 1.5; } }
+
+.appicon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sentinel-icon { background: #182b38; color: #a9e7d2; padding: 4px; }
+.sheet-head .sentinel-icon { padding: 6px; }
