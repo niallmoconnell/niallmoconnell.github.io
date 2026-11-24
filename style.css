@@ -1,58 +1,32 @@
+/* Charcoal palette, consistent across system colour preferences. */
 :root {
-  --bg: #7c7363;           /* Audrey's warm taupe (darkened for text contrast) */
-  --fg: #211f1c;
-  --muted: #726c63;
-  --link: #2f6b4f;
-  --link-hover: #23543d;
-  --rule: #e7e3da;
-  --card: #ffffff;
-  --pop: #211f1c;          /* border + hard-shadow color */
-  --shadow: #211f1c;       /* hard-shadow color (dark) */
-  --ink2: #4a443b;         /* readable secondary text (in-card) */
-  --onbg: #ffffff;              /* text on the taupe background */
-  --onbg-2: rgba(255,255,255,0.90); /* secondary text on background */
-  --onbg-3: rgba(255,255,255,0.70); /* muted text on background */
-  --chip: #f3f0ea;             /* small button fill (in-card) */
-  --box: rgba(255,255,255,0.16);      /* translucent glassy box (Audrey) */
-  --box-btn: rgba(255,255,255,0.26);  /* small button on a glassy box */
-  --box-border: rgba(255,255,255,0.42); /* light glassy edge */
-  --wash: rgba(255,255,255,0.05); /* faint top-of-page lift */
+  color-scheme: dark;
+  --bg: #181a1b;
+  --fg: #f5f3ee;
+  --muted: #adb3b8;
+  --link: #d9e1e6;
+  --link-hover: #ffffff;
+  --rule: #3b4145;
+  --card: #242729;
+  --pop: #42484c;
+  --shadow: #0c0e0f;
+  --ink2: #c7ccd0;
+  --onbg: #f5f3ee;
+  --onbg-2: #c7ccd0;
+  --onbg-3: #adb3b8;
+  --chip: #303538;
+  --box: #242729;
+  --box-btn: #303538;
+  --box-border: #42484c;
+  --wash: rgba(255,255,255,0.025);
   --maxw: 600px;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #14130f;
-    --fg: #ece9e2;
-    --muted: #9c968b;
-    --link: #86c9a3;
-    --link-hover: #a6dcbd;
-    --rule: #2b2924;
-    --card: #1f1e18;
-    --pop: #6fb894;
-    --shadow: #6fb894;
-    --ink2: #c9c3b7;
-    --onbg: #ece9e2;
-    --onbg-2: rgba(236,233,226,0.82);
-    --onbg-3: rgba(236,233,226,0.6);
-    --chip: #2a2822;
-    --box: rgba(255,255,255,0.06);
-    --box-btn: rgba(255,255,255,0.10);
-    --box-border: rgba(255,255,255,0.16);
-    --wash: rgba(150, 140, 120, 0.10);
-  }
-}
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #14130f;
-    background-image: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 34%);
-  }
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background-color: #7c7363;
-  background-image: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.12) 13%, rgba(255,255,255,0) 34%);
+  background-color: var(--bg);
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.01) 13%, rgba(255,255,255,0) 34%);
   background-attachment: fixed;
   color: var(--fg);
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
@@ -320,8 +294,8 @@ p { margin: 0 0 0.8rem; }
 }
 
 /* ================= Bottom sheets ================= */
-:root { --sheet-bg:#f4f1ea; --sheet-fg:#26221c; --sheet-muted:#877e6f; --sheet-ink2:#4a443b; }
-@media (prefers-color-scheme: dark){ :root{ --sheet-bg:#232019; --sheet-fg:#ece9e2; --sheet-muted:#9c968b; --sheet-ink2:#c9c3b7; } }
+:root { --sheet-bg:#242729; --sheet-fg:#f5f3ee; --sheet-muted:#adb3b8; --sheet-ink2:#c7ccd0; }
+
 
 body.sheet-open { overflow: hidden; }
 
