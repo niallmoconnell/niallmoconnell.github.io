@@ -1,7 +1,5 @@
 (function () {
   var root = document.documentElement;
-  var theme = 'dark';
-  try { if (localStorage.getItem('portfolio-theme') === 'light') theme = 'light'; } catch (e) {}
   function apply(value) {
     root.dataset.theme = value;
     var meta = document.querySelector('meta[name="theme-color"]');
@@ -13,7 +11,7 @@
       button.title = label;
     }
   }
-  apply(theme);
+  apply('dark');
   document.addEventListener('DOMContentLoaded', function () {
     var button = document.getElementById('themeToggle');
     if (!button) return;
@@ -21,7 +19,6 @@
     button.addEventListener('click', function () {
       var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
       apply(next);
-      try { localStorage.setItem('portfolio-theme', next); } catch (e) {}
     });
   });
 })();
